@@ -36,8 +36,7 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        # O Carrefour bloqueia os servidores do GitHub; ele é lido pelo Mac (pasta mac/).
-        run: python -m monitor --sem-loja=carrefour
+        run: python -m monitor
 
       - name: Salvar histórico no repositório
         if: always()

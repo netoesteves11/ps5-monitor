@@ -94,7 +94,7 @@ fetch('data.json?' + Date.now()).then(r => r.json()).then(render).catch(e => {
 
 function render(data) {
   document.getElementById('sub').textContent =
-    'Preço à vista, só vendedor oficial (KaBuM!, Amazon, Magalu, Carrefour). Atualizado em ' + DT(data.generated) + '.';
+    'Preço à vista, só vendedor oficial (KaBuM!, Amazon, Magalu). Atualizado em ' + DT(data.generated) + '.';
   const app = document.getElementById('app');
   for (const p of data.products) app.appendChild(productCard(p));
 }

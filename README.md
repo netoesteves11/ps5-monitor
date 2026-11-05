@@ -1,7 +1,7 @@
 # Monitor de preços — PS5 Digital
 
 Lê 2× por dia (9h e 21h, horário de Brasília) o preço à vista e o parcelado de dois modelos
-nas lojas Kabum, Amazon, Magazine Luiza e Carrefour. Grava o histórico em `data/prices.csv`
+nas lojas Kabum, Amazon e Magazine Luiza. Grava o histórico em `data/prices.csv`
 e avisa no Telegram quando:
 
 - o preço **cai** em relação à última leitura;
@@ -13,14 +13,13 @@ Página com gráfico: `docs/index.html` (publicada pelo GitHub Pages).
 
 ## Quais anúncios contam
 
-Só valem ofertas **novas**, vendidas pela conta oficial de uma das 4 lojas (KaBuM!, Amazon,
-Magalu, Carrefour), mesmo que dentro de outro marketplace. Qualquer outro vendedor é ignorado,
+Só valem ofertas **novas**, vendidas pela conta oficial de uma das lojas (KaBuM!, Amazon,
+Magalu), mesmo que dentro de outro marketplace. Qualquer outro vendedor é ignorado,
 e também títulos com leitor de disco, usado, reembalado, Pro, 1 TB, acessórios etc.
 
 | Loja | Como lê | Observação |
 |---|---|---|
 | Kabum | requisição simples | – |
-| Carrefour | requisição simples, **pelo seu Mac** | Bloqueia os servidores do GitHub, então é lido pelo Mac às 9h15 e 21h15 (só com o Mac ligado; se estiver dormindo, roda quando acordar). Console sem jogos: busca no site a cada execução |
 | Amazon | navegador sem janela (Playwright) | Lê "Todas as ofertas" e escolhe a menor de Amazon, KaBuM! ou Magalu |
 | Magazine Luiza | Playwright → **plano B: Buscapé** | O Magalu bloqueia leitura automática (403). Pelo Buscapé o vendedor final **não** é confirmado, e isso aparece no aviso e na página |
 
@@ -58,16 +57,6 @@ Depois disso ele roda sozinho às 9h e às 21h. O GitHub pode atrasar alguns min
 **Settings → Pages → Source: Deploy from a branch → Branch `main`, pasta `/docs` → Save.**
 Em ~1 min a página fica em `https://<seu-usuario>.github.io/ps5-monitor/`.
 
-### 6. Carrefour pelo Mac
-O GitHub roda Kabum, Amazon e Magalu. O Carrefour roda no Mac:
-```bash
-git clone https://github.com/netoesteves11/ps5-monitor.git ~/ps5-monitor && cd ~/ps5-monitor
-python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt
-mkdir -p ~/.config/ps5-monitor && printf 'TELEGRAM_BOT_TOKEN=...\nTELEGRAM_CHAT_ID=...\n' > ~/.config/ps5-monitor/env && chmod 600 ~/.config/ps5-monitor/env
-zsh mac/instalar.sh
-```
-Para desligar: `zsh mac/instalar.sh remover`. Log: `mac/carrefour.log`.
-
 ## Ajustes do dia a dia
 - **Valor-alvo:** edite `valor_alvo` em `config.toml` (direto no GitHub, no ícone de lápis).
 - **Trocar ou adicionar anúncio:** edite a lista `urls` da loja em `config.toml`.
@@ -78,6 +67,8 @@ Para desligar: `zsh mac/instalar.sh remover`. Log: `mac/carrefour.log`.
   .venv/bin/python -m monitor --loja=kabum --dry-run
   TELEGRAM_BOT_TOKEN=... TELEGRAM_CHAT_ID=... .venv/bin/python -m monitor.notify   # testa o Telegram
   ```
+
+O Carrefour foi removido: ele bloqueia os servidores do GitHub (HTTP 403) e não aparece no Buscapé.
 
 ## Se uma loja começar a falhar
 Você recebe "⚠️ <loja> falhando" depois de 3 falhas seguidas (~1,5 dia). Caminhos possíveis:

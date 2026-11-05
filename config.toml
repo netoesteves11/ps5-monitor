@@ -1,4 +1,5 @@
 # Monitor de preços PS5 — configuração
+# Lojas: Kabum, Amazon e Magazine Luiza. (Carrefour foi removido: bloqueia os servidores do GitHub.)
 # Edite os valores-alvo à vontade; o próximo agendamento já usa os novos valores.
 
 [settings]
@@ -56,11 +57,6 @@ excluir = ["wolverine", "fortnite", "ghost of", "gta", "anivers", "spider", "god
   # "Magazine Luiza" no Buscapé (o vendedor final não pode ser confirmado lá).
   plano_b_buscape = "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-ps5-edicao-digital-bundle-4k"
 
-  [[produtos.ofertas]]
-  loja = "carrefour"
-  urls = ["https://www.carrefour.com.br/produto/console-playstation-5-slim-digital-825gb-pacote-astro-bot-e-gran-turismo-7-336324399"]
-  # O Carrefour às vezes recusa os servidores do GitHub. Se bloquear, lê a oferta "Carrefour" no Buscapé.
-  plano_b_buscape = "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-ps5-edicao-digital-bundle-4k"
 
 # ---------------------------------------------------------------------------
 [[produtos]]
@@ -87,8 +83,3 @@ excluir = ["jogos", "\\+ ?jogo", "bundle", "pacote", "pack", "astro bot", "gran 
   urls = ["https://www.magazineluiza.com.br/playstation-5-edicao-digital-825gb-1-controle-branco-sony/p/240604800/ga/gap5/"]
   plano_b_buscape = "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k"
 
-  [[produtos.ofertas]]
-  loja = "carrefour"
-  # Hoje o Carrefour não vende esse modelo direto; o monitor busca no site a cada execução
-  # e só aceita anúncio "vendido e entregue por Carrefour".
-  busca = "console playstation 5 slim digital 825gb"

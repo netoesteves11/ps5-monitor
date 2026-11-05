@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-05T18:32:49-03:00",
+ "generated": "2026-11-05T18:38:24-03:00",
  "products": [
   {
    "id": "bundle",
@@ -88,34 +88,6 @@
       "seller": "Magazine Luiza",
       "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-ps5-edicao-digital-bundle-4k",
       "note": "lido via Buscapé — vendedor final não confirmado; vendedor não confirmado (via Buscapé) | parcial: Magazine Luiza bloqueou; usado plano B (Buscapé)"
-     }
-    },
-    {
-     "id": "carrefour",
-     "name": "Carrefour",
-     "points": [
-      {
-       "t": "2026-11-05T17:57:08-03:00",
-       "p": 4599.0
-      },
-      {
-       "t": "2026-11-05T18:23:29-03:00",
-       "p": null
-      },
-      {
-       "t": "2026-11-05T18:29:30-03:00",
-       "p": null
-      }
-     ],
-     "latest": {
-      "t": "2026-11-05T18:29:30-03:00",
-      "status": "bloqueado",
-      "price": null,
-      "installment": null,
-      "installments": "",
-      "seller": "",
-      "url": "",
-      "note": "Carrefour bloqueou; usado plano B (Buscapé); Buscapé não listou oferta dessa loja"
      }
     }
    ]
@@ -207,34 +179,6 @@
       "seller": "Magazine Luiza",
       "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k",
       "note": "lido via Buscapé — vendedor final não confirmado; vendedor não confirmado (via Buscapé) | parcial: Magazine Luiza bloqueou; usado plano B (Buscapé)"
-     }
-    },
-    {
-     "id": "carrefour",
-     "name": "Carrefour",
-     "points": [
-      {
-       "t": "2026-11-05T17:57:08-03:00",
-       "p": null
-      },
-      {
-       "t": "2026-11-05T18:23:29-03:00",
-       "p": null
-      },
-      {
-       "t": "2026-11-05T18:29:30-03:00",
-       "p": null
-      }
-     ],
-     "latest": {
-      "t": "2026-11-05T18:29:30-03:00",
-      "status": "bloqueado",
-      "price": null,
-      "installment": null,
-      "installments": "",
-      "seller": "",
-      "url": "",
-      "note": "bloqueado: HTTP 403 (também no navegador)"
      }
     }
    ]
