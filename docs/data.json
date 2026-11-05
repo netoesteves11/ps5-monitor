@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-05T18:00:55-03:00",
+ "generated": "2026-11-05T18:26:25-03:00",
  "products": [
   {
    "id": "bundle",
@@ -13,10 +13,14 @@
       {
        "t": "2026-11-05T17:57:08-03:00",
        "p": 4146.87
+      },
+      {
+       "t": "2026-11-05T18:23:29-03:00",
+       "p": 4146.87
       }
      ],
      "latest": {
-      "t": "2026-11-05T17:57:08-03:00",
+      "t": "2026-11-05T18:23:29-03:00",
       "status": "ok",
       "price": 4146.87,
       "installment": 4459.0,
@@ -33,10 +37,14 @@
       {
        "t": "2026-11-05T17:57:08-03:00",
        "p": 4146.86
+      },
+      {
+       "t": "2026-11-05T18:23:29-03:00",
+       "p": 4146.86
       }
      ],
      "latest": {
-      "t": "2026-11-05T17:57:08-03:00",
+      "t": "2026-11-05T18:23:29-03:00",
       "status": "ok",
       "price": 4146.86,
       "installment": null,
@@ -53,10 +61,14 @@
       {
        "t": "2026-11-05T17:57:08-03:00",
        "p": 4191.46
+      },
+      {
+       "t": "2026-11-05T18:23:29-03:00",
+       "p": 4191.46
       }
      ],
      "latest": {
-      "t": "2026-11-05T17:57:08-03:00",
+      "t": "2026-11-05T18:23:29-03:00",
       "status": "ok",
       "price": 4191.46,
       "installment": 4459.0,
@@ -73,17 +85,21 @@
       {
        "t": "2026-11-05T17:57:08-03:00",
        "p": 4599.0
+      },
+      {
+       "t": "2026-11-05T18:23:29-03:00",
+       "p": null
       }
      ],
      "latest": {
-      "t": "2026-11-05T17:57:08-03:00",
-      "status": "ok",
-      "price": 4599.0,
-      "installment": 4599.0,
-      "installments": "10x sem juros",
-      "seller": "Carrefour",
-      "url": "https://www.carrefour.com.br/produto/console-playstation-5-slim-digital-825gb-pacote-astro-bot-e-gran-turismo-7-336324399",
-      "note": ""
+      "t": "2026-11-05T18:23:29-03:00",
+      "status": "bloqueado",
+      "price": null,
+      "installment": null,
+      "installments": "",
+      "seller": "",
+      "url": "",
+      "note": "bloqueado: HTTP 403"
      }
     }
    ]
@@ -100,10 +116,14 @@
       {
        "t": "2026-11-05T17:57:08-03:00",
        "p": 4370.07
+      },
+      {
+       "t": "2026-11-05T18:23:29-03:00",
+       "p": 4370.07
       }
      ],
      "latest": {
-      "t": "2026-11-05T17:57:08-03:00",
+      "t": "2026-11-05T18:23:29-03:00",
       "status": "ok",
       "price": 4370.07,
       "installment": 4699.0,
@@ -120,10 +140,14 @@
       {
        "t": "2026-11-05T17:57:08-03:00",
        "p": 4139.9
+      },
+      {
+       "t": "2026-11-05T18:23:29-03:00",
+       "p": 4139.9
       }
      ],
      "latest": {
-      "t": "2026-11-05T17:57:08-03:00",
+      "t": "2026-11-05T18:23:29-03:00",
       "status": "ok",
       "price": 4139.9,
       "installment": null,
@@ -140,10 +164,14 @@
       {
        "t": "2026-11-05T17:57:08-03:00",
        "p": 4699.0
+      },
+      {
+       "t": "2026-11-05T18:23:29-03:00",
+       "p": 4699.0
       }
      ],
      "latest": {
-      "t": "2026-11-05T17:57:08-03:00",
+      "t": "2026-11-05T18:23:29-03:00",
       "status": "ok",
       "price": 4699.0,
       "installment": 4699.0,
@@ -160,17 +188,21 @@
       {
        "t": "2026-11-05T17:57:08-03:00",
        "p": null
+      },
+      {
+       "t": "2026-11-05T18:23:29-03:00",
+       "p": null
       }
      ],
      "latest": {
-      "t": "2026-11-05T17:57:08-03:00",
-      "status": "sem_oferta_oficial",
+      "t": "2026-11-05T18:23:29-03:00",
+      "status": "bloqueado",
       "price": null,
       "installment": null,
       "installments": "",
       "seller": "",
       "url": "",
-      "note": "Console PlayStation 5 Slim Digital 825GB – Pacote …: título contém 'pacote'; vendedor terceiro: mcs variedades; Console Playstation 5 Slim Edição Digital 825GB Co…: título contém 'jogos'; vendedor terceiro: gazin.com.br"
+      "note": "bloqueado: HTTP 403"
      }
     }
    ]
