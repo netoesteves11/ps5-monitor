@@ -57,7 +57,33 @@ _session = requests.Session()
 _session.headers.update(HEADERS)
 
 
-def _get(url: str) -> str:
+def _get_browser(url: str, browser) -> str:
+    """Mesma página, aberta no navegador (usado quando a requisição simples é recusada)."""
+    page = browser.new_page()
+    try:
+        resp = page.goto(url, wait_until="domcontentloaded", timeout=60000)
+        if resp is not None and resp.status in (403, 429, 503):
+            raise Blocked(f"HTTP {resp.status} (também no navegador)")
+        page.wait_for_timeout(1500)
+        html = page.content()
+    finally:
+        page.close()
+    low = html[:20000].lower()
+    if "captcha" in low and ("robot" in low or "robô" in low or "validate" in low):
+        raise Blocked("CAPTCHA")
+    return html
+
+
+def _get(url: str, browser=None) -> str:
+    try:
+        return _get_plain(url)
+    except Blocked:
+        if browser is None:
+            raise
+        return _get_browser(url, browser)
+
+
+def _get_plain(url: str) -> str:
     r = _session.get(url, timeout=40)
     if r.status_code in (403, 429, 503):
         raise Blocked(f"HTTP {r.status_code}")
@@ -109,8 +135,8 @@ def kabum(url: str, browser=None) -> list[Offer]:
 
 
 # ------------------------------------------------------------------- CARREFOUR
-def _carrefour_product(url: str) -> Offer:
-    html = _get(url)
+def _carrefour_product(url: str, browser=None) -> Offer:
+    html = _get(url, browser)
     lds = re.findall(r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', html, re.S)
     prod = None
     for raw in lds:
@@ -160,13 +186,13 @@ def _carrefour_product(url: str) -> Offer:
 
 
 def carrefour(url: str, browser=None) -> list[Offer]:
-    return [_carrefour_product(url)]
+    return [_carrefour_product(url, browser)]
 
 
-def carrefour_search(query: str, max_candidates: int = 6, pause=None) -> list[Offer]:
+def carrefour_search(query: str, max_candidates: int = 6, pause=None, browser=None) -> list[Offer]:
     """Busca no Carrefour e lê os anúncios candidatos (filtragem fina vem depois)."""
     from urllib.parse import quote
-    html = _get("https://www.carrefour.com.br/busca/" + quote(query))
+    html = _get("https://www.carrefour.com.br/busca/" + quote(query), browser)
     links = []
     for href in re.findall(r'href="(/produto/[^"?#]+)"', html):
         if "console" in href and "playstation" in href and href not in links:
@@ -176,7 +202,7 @@ def carrefour_search(query: str, max_candidates: int = 6, pause=None) -> list[Of
         if pause:
             pause()
         try:
-            offers.append(_carrefour_product("https://www.carrefour.com.br" + href))
+            offers.append(_carrefour_product("https://www.carrefour.com.br" + href, browser))
         except ParseError:
             continue
     return offers
@@ -341,7 +367,7 @@ def buscape(url: str, browser, store_label: str) -> list[Offer]:
 
 
 FETCHERS = {"kabum": kabum, "carrefour": carrefour, "amazon": amazon, "magalu": magalu}
-NEEDS_BROWSER = {"amazon", "magalu"}
+NEEDS_BROWSER = {"amazon", "magalu", "carrefour"}  # Carrefour: só se a requisição simples for recusada
 BUSCAPE_LABEL = {"magalu": "Magazine Luiza", "kabum": "KaBuM!", "amazon": "Amazon", "carrefour": "Carrefour"}
 STORE_NAMES = {"kabum": "Kabum", "amazon": "Amazon", "magalu": "Magazine Luiza", "carrefour": "Carrefour"}
 FALLBACK_HINT = {

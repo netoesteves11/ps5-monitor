@@ -59,6 +59,8 @@ excluir = ["wolverine", "fortnite", "ghost of", "gta", "anivers", "spider", "god
   [[produtos.ofertas]]
   loja = "carrefour"
   urls = ["https://www.carrefour.com.br/produto/console-playstation-5-slim-digital-825gb-pacote-astro-bot-e-gran-turismo-7-336324399"]
+  # O Carrefour às vezes recusa os servidores do GitHub. Se bloquear, lê a oferta "Carrefour" no Buscapé.
+  plano_b_buscape = "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-ps5-edicao-digital-bundle-4k"
 
 # ---------------------------------------------------------------------------
 [[produtos]]

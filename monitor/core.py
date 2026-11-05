@@ -143,7 +143,7 @@ def collect(cfg: dict, only_store: str | None = None) -> list[Reading]:
                     if isinstance(target, tuple):
                         if store != "carrefour":
                             raise ParseError("busca só implementada para Carrefour")
-                        offers += stores.carrefour_search(target[1], pause=pause)
+                        offers += stores.carrefour_search(target[1], pause=pause, browser=context)
                     else:
                         offers += stores.FETCHERS[store](target, context)
                 except Blocked as e:
