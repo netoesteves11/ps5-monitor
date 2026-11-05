@@ -101,7 +101,7 @@ def pick_best(cfg, product, store, offers: list[Offer]) -> Reading:
 
 
 # ---------------------------------------------------------------- coleta
-def collect(cfg: dict, only_store: str | None = None) -> list[Reading]:
+def collect(cfg: dict, only_store: str | None = None, skip: set[str] = frozenset()) -> list[Reading]:
     s = cfg["settings"]
 
     def pause():
@@ -111,6 +111,8 @@ def collect(cfg: dict, only_store: str | None = None) -> list[Reading]:
     for product in cfg["produtos"]:
         for entry in product["ofertas"]:
             if only_store and entry["loja"] != only_store:
+                continue
+            if entry["loja"] in skip:
                 continue
             jobs.append((product, entry))
 
@@ -302,10 +304,11 @@ def summary(cfg: dict, readings: list[Reading]) -> str:
 def main(argv: list[str]) -> int:
     dry = "--dry-run" in argv          # não grava nem envia nada
     only = next((a.split("=", 1)[1] for a in argv if a.startswith("--loja=")), None)
+    skip = {x for a in argv if a.startswith("--sem-loja=") for x in a.split("=", 1)[1].split(",")}
     cfg = tomllib.loads((ROOT / "config.toml").read_text(encoding="utf-8"))
     now = datetime.now(TZ).isoformat(timespec="seconds")
     print(f"Monitor PS5 — {now}")
-    readings = collect(cfg, only)
+    readings = collect(cfg, only, skip)
     state = load_state()
     msgs = evaluate(cfg, readings, state, now)
     text = summary(cfg, readings)

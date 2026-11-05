@@ -20,7 +20,7 @@ e também títulos com leitor de disco, usado, reembalado, Pro, 1 TB, acessório
 | Loja | Como lê | Observação |
 |---|---|---|
 | Kabum | requisição simples | – |
-| Carrefour | requisição simples | Console sem jogos: busca no site a cada execução (hoje só há marketplace) |
+| Carrefour | requisição simples, **pelo seu Mac** | Bloqueia os servidores do GitHub, então é lido pelo Mac às 9h15 e 21h15 (só com o Mac ligado; se estiver dormindo, roda quando acordar). Console sem jogos: busca no site a cada execução |
 | Amazon | navegador sem janela (Playwright) | Lê "Todas as ofertas" e escolhe a menor de Amazon, KaBuM! ou Magalu |
 | Magazine Luiza | Playwright → **plano B: Buscapé** | O Magalu bloqueia leitura automática (403). Pelo Buscapé o vendedor final **não** é confirmado, e isso aparece no aviso e na página |
 
@@ -57,6 +57,16 @@ Depois disso ele roda sozinho às 9h e às 21h. O GitHub pode atrasar alguns min
 ### 5. Página com gráfico (GitHub Pages)
 **Settings → Pages → Source: Deploy from a branch → Branch `main`, pasta `/docs` → Save.**
 Em ~1 min a página fica em `https://<seu-usuario>.github.io/ps5-monitor/`.
+
+### 6. Carrefour pelo Mac
+O GitHub roda Kabum, Amazon e Magalu. O Carrefour roda no Mac:
+```bash
+git clone https://github.com/netoesteves11/ps5-monitor.git ~/ps5-monitor && cd ~/ps5-monitor
+python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt
+mkdir -p ~/.config/ps5-monitor && printf 'TELEGRAM_BOT_TOKEN=...\nTELEGRAM_CHAT_ID=...\n' > ~/.config/ps5-monitor/env && chmod 600 ~/.config/ps5-monitor/env
+zsh mac/instalar.sh
+```
+Para desligar: `zsh mac/instalar.sh remover`. Log: `mac/carrefour.log`.
 
 ## Ajustes do dia a dia
 - **Valor-alvo:** edite `valor_alvo` em `config.toml` (direto no GitHub, no ícone de lápis).
