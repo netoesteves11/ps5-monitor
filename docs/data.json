@@ -1,0 +1,179 @@
+{
+ "generated": "2026-11-05T18:00:55-03:00",
+ "products": [
+  {
+   "id": "bundle",
+   "name": "PS5 Digital 825GB + Astro Bot + Gran Turismo 7",
+   "target": 3600.0,
+   "stores": [
+    {
+     "id": "kabum",
+     "name": "Kabum",
+     "points": [
+      {
+       "t": "2026-11-05T17:57:08-03:00",
+       "p": 4146.87
+      }
+     ],
+     "latest": {
+      "t": "2026-11-05T17:57:08-03:00",
+      "status": "ok",
+      "price": 4146.87,
+      "installment": 4459.0,
+      "installments": "10x sem juros",
+      "seller": "KaBuM!",
+      "url": "https://www.kabum.com.br/produto/989702",
+      "note": ""
+     }
+    },
+    {
+     "id": "amazon",
+     "name": "Amazon",
+     "points": [
+      {
+       "t": "2026-11-05T17:57:08-03:00",
+       "p": 4146.86
+      }
+     ],
+     "latest": {
+      "t": "2026-11-05T17:57:08-03:00",
+      "status": "ok",
+      "price": 4146.86,
+      "installment": null,
+      "installments": "",
+      "seller": "Amazon.com.br",
+      "url": "https://www.amazon.com.br/dp/B0FPGF9J2J",
+      "note": "enviado por Amazon.com.br"
+     }
+    },
+    {
+     "id": "magalu",
+     "name": "Magazine Luiza",
+     "points": [
+      {
+       "t": "2026-11-05T17:57:08-03:00",
+       "p": 4191.46
+      }
+     ],
+     "latest": {
+      "t": "2026-11-05T17:57:08-03:00",
+      "status": "ok",
+      "price": 4191.46,
+      "installment": 4459.0,
+      "installments": "10x",
+      "seller": "Magazine Luiza",
+      "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-ps5-edicao-digital-bundle-4k",
+      "note": "lido via Buscapé — vendedor final não confirmado; vendedor não confirmado (via Buscapé) | parcial: Magazine Luiza bloqueou; usado plano B (Buscapé)"
+     }
+    },
+    {
+     "id": "carrefour",
+     "name": "Carrefour",
+     "points": [
+      {
+       "t": "2026-11-05T17:57:08-03:00",
+       "p": 4599.0
+      }
+     ],
+     "latest": {
+      "t": "2026-11-05T17:57:08-03:00",
+      "status": "ok",
+      "price": 4599.0,
+      "installment": 4599.0,
+      "installments": "10x sem juros",
+      "seller": "Carrefour",
+      "url": "https://www.carrefour.com.br/produto/console-playstation-5-slim-digital-825gb-pacote-astro-bot-e-gran-turismo-7-336324399",
+      "note": ""
+     }
+    }
+   ]
+  },
+  {
+   "id": "console",
+   "name": "PS5 Digital 825GB (sem jogos)",
+   "target": 3800.0,
+   "stores": [
+    {
+     "id": "kabum",
+     "name": "Kabum",
+     "points": [
+      {
+       "t": "2026-11-05T17:57:08-03:00",
+       "p": 4370.07
+      }
+     ],
+     "latest": {
+      "t": "2026-11-05T17:57:08-03:00",
+      "status": "ok",
+      "price": 4370.07,
+      "installment": 4699.0,
+      "installments": "10x sem juros",
+      "seller": "KaBuM!",
+      "url": "https://www.kabum.com.br/produto/1050570",
+      "note": ""
+     }
+    },
+    {
+     "id": "amazon",
+     "name": "Amazon",
+     "points": [
+      {
+       "t": "2026-11-05T17:57:08-03:00",
+       "p": 4139.9
+      }
+     ],
+     "latest": {
+      "t": "2026-11-05T17:57:08-03:00",
+      "status": "ok",
+      "price": 4139.9,
+      "installment": null,
+      "installments": "",
+      "seller": "KaBuM!",
+      "url": "https://www.amazon.com.br/dp/B0GWNKJDCZ",
+      "note": "enviado por Amazon"
+     }
+    },
+    {
+     "id": "magalu",
+     "name": "Magazine Luiza",
+     "points": [
+      {
+       "t": "2026-11-05T17:57:08-03:00",
+       "p": 4699.0
+      }
+     ],
+     "latest": {
+      "t": "2026-11-05T17:57:08-03:00",
+      "status": "ok",
+      "price": 4699.0,
+      "installment": 4699.0,
+      "installments": "10x",
+      "seller": "Magazine Luiza",
+      "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k",
+      "note": "lido via Buscapé — vendedor final não confirmado; vendedor não confirmado (via Buscapé) | parcial: Magazine Luiza bloqueou; usado plano B (Buscapé)"
+     }
+    },
+    {
+     "id": "carrefour",
+     "name": "Carrefour",
+     "points": [
+      {
+       "t": "2026-11-05T17:57:08-03:00",
+       "p": null
+      }
+     ],
+     "latest": {
+      "t": "2026-11-05T17:57:08-03:00",
+      "status": "sem_oferta_oficial",
+      "price": null,
+      "installment": null,
+      "installments": "",
+      "seller": "",
+      "url": "",
+      "note": "Console PlayStation 5 Slim Digital 825GB – Pacote …: título contém 'pacote'; vendedor terceiro: mcs variedades; Console Playstation 5 Slim Edição Digital 825GB Co…: título contém 'jogos'; vendedor terceiro: gazin.com.br"
+     }
+    }
+   ]
+  }
+ ]
+}

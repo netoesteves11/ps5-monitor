@@ -1,0 +1,88 @@
+{
+  "bundle|kabum": {
+    "last_price": 4146.87,
+    "min_price": 4146.87,
+    "min_at": "2026-11-05T17:57:08-03:00",
+    "failures": 0,
+    "failure_alerted": false,
+    "below_target": false,
+    "last_status": "ok",
+    "last_at": "2026-11-05T17:57:08-03:00",
+    "url": "https://www.kabum.com.br/produto/989702"
+  },
+  "bundle|amazon": {
+    "last_price": 4146.86,
+    "min_price": 4146.86,
+    "min_at": "2026-11-05T17:57:08-03:00",
+    "failures": 0,
+    "failure_alerted": false,
+    "below_target": false,
+    "last_status": "ok",
+    "last_at": "2026-11-05T17:57:08-03:00",
+    "url": "https://www.amazon.com.br/dp/B0FPGF9J2J"
+  },
+  "bundle|magalu": {
+    "last_price": 4191.46,
+    "min_price": 4191.46,
+    "min_at": "2026-11-05T17:57:08-03:00",
+    "failures": 0,
+    "failure_alerted": false,
+    "below_target": false,
+    "last_status": "ok",
+    "last_at": "2026-11-05T17:57:08-03:00",
+    "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-ps5-edicao-digital-bundle-4k"
+  },
+  "bundle|carrefour": {
+    "last_price": 4599.0,
+    "min_price": 4599.0,
+    "min_at": "2026-11-05T17:57:08-03:00",
+    "failures": 0,
+    "failure_alerted": false,
+    "below_target": false,
+    "last_status": "ok",
+    "last_at": "2026-11-05T17:57:08-03:00",
+    "url": "https://www.carrefour.com.br/produto/console-playstation-5-slim-digital-825gb-pacote-astro-bot-e-gran-turismo-7-336324399"
+  },
+  "console|kabum": {
+    "last_price": 4370.07,
+    "min_price": 4370.07,
+    "min_at": "2026-11-05T17:57:08-03:00",
+    "failures": 0,
+    "failure_alerted": false,
+    "below_target": false,
+    "last_status": "ok",
+    "last_at": "2026-11-05T17:57:08-03:00",
+    "url": "https://www.kabum.com.br/produto/1050570"
+  },
+  "console|amazon": {
+    "last_price": 4139.9,
+    "min_price": 4139.9,
+    "min_at": "2026-11-05T17:57:08-03:00",
+    "failures": 0,
+    "failure_alerted": false,
+    "below_target": false,
+    "last_status": "ok",
+    "last_at": "2026-11-05T17:57:08-03:00",
+    "url": "https://www.amazon.com.br/dp/B0GWNKJDCZ"
+  },
+  "console|magalu": {
+    "last_price": 4699.0,
+    "min_price": 4699.0,
+    "min_at": "2026-11-05T17:57:08-03:00",
+    "failures": 0,
+    "failure_alerted": false,
+    "below_target": false,
+    "last_status": "ok",
+    "last_at": "2026-11-05T17:57:08-03:00",
+    "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k"
+  },
+  "console|carrefour": {
+    "last_price": null,
+    "min_price": null,
+    "min_at": null,
+    "failures": 0,
+    "failure_alerted": false,
+    "below_target": false,
+    "last_status": "sem_oferta_oficial"
+  }
+}

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monitor de preços — PS5 Digital</title>
+<style>
+.viz-root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface-1: #fcfcfb;
+  --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --border: rgba(11,11,11,0.10);
+  --good: #006300;
+  --s-kabum: #2a78d6; --s-amazon: #eb6834; --s-magalu: #1baf7a; --s-carrefour: #eda100;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) .viz-root {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface-1: #1a1a19;
+    --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+    --good: #0ca30c;
+    --s-kabum: #3987e5; --s-amazon: #d95926; --s-magalu: #199e70; --s-carrefour: #c98500;
+  }
+}
+:root[data-theme="dark"] .viz-root {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface-1: #1a1a19;
+  --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+  --good: #0ca30c;
+  --s-kabum: #3987e5; --s-amazon: #d95926; --s-magalu: #199e70; --s-carrefour: #c98500;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.viz-root { background: var(--page); color: var(--text-primary); min-height: 100vh;
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; padding: 32px 20px 48px; }
+.wrap { max-width: 980px; margin: 0 auto; }
+h1 { font-size: 22px; margin: 0 0 4px; }
+.sub { color: var(--text-secondary); margin: 0 0 28px; }
+.card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+.card h2 { font-size: 17px; margin: 0 0 2px; }
+.card .meta { color: var(--text-secondary); margin: 0 0 16px; font-size: 13px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.tile { border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; position: relative; text-decoration: none; color: inherit; display: block; }
+.tile:hover { background: color-mix(in srgb, var(--text-primary) 4%, transparent); }
+.tile.best { border: 2px solid var(--good); padding: 9px 11px; }
+.tile .store { display: flex; align-items: center; gap: 6px; color: var(--text-secondary); font-size: 13px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.tile .price { font-size: 22px; font-weight: 600; margin-top: 2px; }
+.tile .small { color: var(--text-muted); font-size: 12px; }
+.badge { display: inline-flex; align-items: center; gap: 4px; color: var(--good); font-size: 12px; font-weight: 600; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; color: var(--text-secondary); font-size: 13px; margin: 4px 0 6px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend .dash { width: 18px; border-top: 2px dashed var(--text-muted); }
+.chart { position: relative; }
+svg { display: block; width: 100%; height: auto; overflow: visible; }
+.tick { fill: var(--text-muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.dlabel { fill: var(--text-secondary); font-size: 11px; }
+.tip { position: absolute; pointer-events: none; background: var(--surface-1); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 10px; font-size: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.12); min-width: 170px; display: none; z-index: 2; }
+.tip .row { display: flex; align-items: center; gap: 6px; justify-content: space-between; }
+.tip .row b { font-variant-numeric: tabular-nums; font-weight: 600; }
+.tip .when { color: var(--text-secondary); margin-bottom: 4px; }
+details { margin-top: 12px; }
+summary { cursor: pointer; color: var(--text-secondary); font-size: 13px; }
+table { border-collapse: collapse; width: 100%; font-size: 12px; margin-top: 8px; }
+th, td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--grid); }
+td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.empty { color: var(--text-muted); padding: 30px 0; text-align: center; }
+.warn { color: var(--text-secondary); font-size: 12px; }
+@media print, (forced-colors: active) { .tile.best { border-style: double; } }
+</style>
+</head>
+<body>
+<div class="viz-root">
+  <div class="wrap">
+    <h1>Monitor de preços — PlayStation 5 Digital</h1>
+    <p class="sub" id="sub">Carregando…</p>
+    <div id="app"></div>
+  </div>
+</div>
+<script>
+const COLORS = { kabum: 'var(--s-kabum)', amazon: 'var(--s-amazon)', magalu: 'var(--s-magalu)', carrefour: 'var(--s-carrefour)' };
+const BRL = v => v == null ? '—' : v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+const BRLk = v => 'R$ ' + (v / 1000).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mil';
+const DT = s => new Date(s).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const STATUS = { ok: 'ok', indisponivel: 'sem estoque', sem_oferta_oficial: 'sem oferta da própria loja', bloqueado: 'bloqueado', erro: 'erro de leitura' };
+
+fetch('data.json?' + Date.now()).then(r => r.json()).then(render).catch(e => {
+  document.getElementById('sub').textContent = 'Ainda não há dados (data.json não encontrado).';
+});
+
+function render(data) {
+  document.getElementById('sub').textContent =
+    'Preço à vista, só vendedor oficial (KaBuM!, Amazon, Magalu, Carrefour). Atualizado em ' + DT(data.generated) + '.';
+  const app = document.getElementById('app');
+  for (const p of data.products) app.appendChild(productCard(p));
+}
+
+function productCard(p) {
+  const card = document.createElement('section');
+  card.className = 'card';
+  const live = p.stores.filter(s => s.latest && s.latest.price != null);
+  const best = live.length ? live.reduce((a, b) => a.latest.price <= b.latest.price ? a : b) : null;
+  const allPts = p.stores.flatMap(s => s.points.filter(x => x.p != null).map(x => x.p));
+  const histMin = allPts.length ? Math.min(...allPts) : null;
+  card.innerHTML = `<h2>${esc(p.name)}</h2>
+    <p class="meta">Seu alvo: <b>${BRL(p.target)}</b> · Menor preço já registrado: <b>${BRL(histMin)}</b></p>`;
+
+  const tiles = document.createElement('div');
+  tiles.className = 'tiles';
+  for (const s of p.stores) {
+    const L = s.latest;
+    const isBest = best && s.id === best.id;
+    const a = document.createElement(L && L.url ? 'a' : 'div');
+    a.className = 'tile' + (isBest ? ' best' : '');
+    if (L && L.url) { a.href = L.url; a.target = '_blank'; a.rel = 'noopener'; }
+    const unverified = L && /não confirmado|Buscapé/.test(L.note || '');
+    a.innerHTML = `<div class="store"><span class="dot" style="background:${COLORS[s.id]}"></span>${esc(s.name)}</div>
+      <div class="price">${L && L.price != null ? BRL(L.price) : '—'}</div>
+      ${isBest ? '<div class="badge">✓ Menor preço agora</div>' : ''}
+      <div class="small">${L ? (L.price != null
+          ? (L.installment ? `ou ${BRL(L.installment)} ${esc(L.installments)} · ` : '') + 'vendido por ' + esc(L.seller)
+          : esc(STATUS[L.status] || L.status)) : 'sem leitura'}</div>
+      ${unverified ? '<div class="warn">⚠ via Buscapé — vendedor não confirmado</div>' : ''}`;
+    tiles.appendChild(a);
+  }
+  card.appendChild(tiles);
+
+  const legend = document.createElement('div');
+  legend.className = 'legend';
+  legend.innerHTML = p.stores.map(s => `<span><span class="dot" style="background:${COLORS[s.id]}"></span>${esc(s.name)}</span>`).join('')
+    + (p.target ? '<span><span class="dash"></span>Seu alvo</span>' : '');
+  card.appendChild(legend);
+  card.appendChild(chart(p));
+  card.appendChild(table(p));
+  return card;
+}
+
+function chart(p) {
+  const box = document.createElement('div');
+  box.className = 'chart';
+  const series = p.stores.map(s => ({ ...s, pts: s.points.map(x => ({ t: +new Date(x.t), p: x.p })) }));
+  const times = [...new Set(series.flatMap(s => s.pts.map(x => x.t)))].sort((a, b) => a - b);
+  const vals = series.flatMap(s => s.pts.filter(x => x.p != null).map(x => x.p));
+  if (!times.length || !vals.length) { box.innerHTML = '<div class="empty">Ainda sem histórico — o gráfico aparece depois das primeiras leituras.</div>'; return box; }
+  if (p.target) vals.push(p.target);
+  const W = 940, H = 300, m = { l: 64, r: 112, t: 12, b: 28 };
+  let lo = Math.min(...vals), hi = Math.max(...vals);
+  const pad = Math.max((hi - lo) * 0.12, 100); lo -= pad; hi += pad;
+  const step = niceStep((hi - lo) / 4);
+  lo = Math.floor(lo / step) * step; hi = Math.ceil(hi / step) * step;
+  const t0 = times[0], t1 = times.length > 1 ? times[times.length - 1] : times[0] + 3600e3;
+  const X = t => m.l + (t - t0) / (t1 - t0) * (W - m.l - m.r);
+  const Y = v => m.t + (hi - v) / (hi - lo) * (H - m.t - m.b);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Histórico de preço por loja: ${esc(p.name)}">`;
+  for (let v = lo; v <= hi + 1e-6; v += step) {
+    s += `<line x1="${m.l}" x2="${W - m.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)" stroke-width="1"/>`;
+    s += `<text class="tick" x="${m.l - 8}" y="${Y(v) + 4}" text-anchor="end">${BRLk(v)}</text>`;
+  }
+  s += `<line x1="${m.l}" x2="${W - m.r}" y1="${H - m.b}" y2="${H - m.b}" stroke="var(--axis)"/>`;
+  const nT = Math.min(6, times.length);
+  for (let i = 0; i < nT; i++) {
+    const t = t0 + (t1 - t0) * (nT === 1 ? 0 : i / (nT - 1));
+    const d = new Date(t).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+    s += `<text class="tick" x="${X(t)}" y="${H - 8}" text-anchor="middle">${d}</text>`;
+  }
+  if (p.target) s += `<line x1="${m.l}" x2="${W - m.r}" y1="${Y(p.target)}" y2="${Y(p.target)}" stroke="var(--text-muted)" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+  const ends = [];
+  for (const se of series) {
+    let d = '', pen = false;
+    for (const x of se.pts) {
+      if (x.p == null) { pen = false; continue; }
+      d += (pen ? 'L' : 'M') + X(x.t).toFixed(1) + ' ' + Y(x.p).toFixed(1); pen = true;
+    }
+    if (d) s += `<path d="${d}" fill="none" stroke="${COLORS[se.id]}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+    for (const x of se.pts) if (x.p != null && se.pts.filter(y => y.p != null).length === 1)
+      s += `<circle cx="${X(x.t)}" cy="${Y(x.p)}" r="4" fill="${COLORS[se.id]}" stroke="var(--surface-1)" stroke-width="2"/>`;
+    const last = [...se.pts].reverse().find(x => x.p != null);
+    if (last) ends.push({ y: Y(last.p), x: X(last.t), name: se.name, id: se.id });
+  }
+  // Direct labels at line ends, nudged apart to avoid collisions.
+  ends.sort((a, b) => a.y - b.y);
+  for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 13) ends[i].y = ends[i - 1].y + 13;
+  for (const e of ends) s += `<text class="dlabel" x="${W - m.r + 8}" y="${e.y + 4}">${esc(e.name)}</text>`;
+  s += `<line id="xh" y1="${m.t}" y2="${H - m.b}" stroke="var(--axis)" stroke-width="1" visibility="hidden"/>`;
+  s += `<g id="hov"></g><rect x="${m.l}" y="0" width="${W - m.l - m.r}" height="${H}" fill="transparent" id="hit"/></svg>`;
+  box.innerHTML = s + '<div class="tip"></div>';
+
+  const svg = box.querySelector('svg'), tip = box.querySelector('.tip'), xh = svg.querySelector('#xh'), hov = svg.querySelector('#hov');
+  const hit = svg.querySelector('#hit');
+  hit.addEventListener('mousemove', ev => {
+    const pt = svg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY;
+    const loc = pt.matrixTransform(svg.getScreenCTM().inverse());
+    const t = times.reduce((a, b) => Math.abs(X(b) - loc.x) < Math.abs(X(a) - loc.x) ? b : a);
+    xh.setAttribute('x1', X(t)); xh.setAttribute('x2', X(t)); xh.setAttribute('visibility', 'visible');
+    let rows = '', dots = '';
+    const items = series.map(se => ({ se, x: se.pts.find(q => q.t === t) })).filter(o => o.x)
+      .sort((a, b) => (a.x.p ?? 1e12) - (b.x.p ?? 1e12));
+    for (const { se, x } of items) {
+      rows += `<div class="row"><span><span class="dot" style="background:${COLORS[se.id]};display:inline-block"></span> ${esc(se.name)}</span><b>${x.p != null ? BRL(x.p) : '—'}</b></div>`;
+      if (x.p != null) dots += `<circle cx="${X(t)}" cy="${Y(x.p)}" r="4.5" fill="${COLORS[se.id]}" stroke="var(--surface-1)" stroke-width="2"/>`;
+    }
+    hov.innerHTML = dots;
+    tip.innerHTML = `<div class="when">${DT(new Date(t))}</div>${rows}`;
+    tip.style.display = 'block';
+    const r = box.getBoundingClientRect(), px = ev.clientX - r.left;
+    tip.style.left = Math.min(px + 14, r.width - tip.offsetWidth - 4) + 'px';
+    tip.style.top = '8px';
+  });
+  hit.addEventListener('mouseleave', () => { tip.style.display = 'none'; xh.setAttribute('visibility', 'hidden'); hov.innerHTML = ''; });
+  return box;
+}
+
+function niceStep(raw) {
+  const p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / p;
+  return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10) * p;
+}
+
+function table(p) {
+  const d = document.createElement('details');
+  const rows = p.stores.flatMap(s => s.points.map(x => ({ t: x.t, s: s.name, p: x.p }))).sort((a, b) => b.t.localeCompare(a.t)).slice(0, 80);
+  d.innerHTML = `<summary>Ver como tabela (últimas ${rows.length} leituras)</summary>
+    <table><thead><tr><th>Data</th><th>Loja</th><th style="text-align:right">À vista</th></tr></thead><tbody>
+    ${rows.map(r => `<tr><td>${DT(r.t)}</td><td>${esc(r.s)}</td><td class="num">${BRL(r.p)}</td></tr>`).join('')}
+    </tbody></table>`;
+  return d;
+}
+</script>
+</body>
+</html>

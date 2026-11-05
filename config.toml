@@ -1,0 +1,92 @@
+# Monitor de preços PS5 — configuração
+# Edite os valores-alvo à vontade; o próximo agendamento já usa os novos valores.
+
+[settings]
+# Quantas falhas seguidas (bloqueio, página mudou...) antes de te avisar.
+falhas_para_avisar = 3
+# Pausa aleatória entre páginas, em segundos (para não sobrecarregar as lojas).
+pausa_min = 8
+pausa_max = 20
+
+# Vendedores aceitos. Só a conta oficial de cada uma das 4 lojas, em qualquer marketplace.
+# Qualquer outro vendedor é ignorado.
+[vendedores_aceitos]
+kabum     = ["kabum!", "kabum"]
+amazon    = ["amazon.com.br", "amazon"]
+magalu    = ["magalu", "magalu.", "magazine luiza", "magazineluiza"]
+carrefour = ["carrefour"]
+# IDs de vendedor da Amazon (parâmetro "seller=" no perfil do vendedor)
+amazon_seller_ids = ["A1ZZFT5FULY4LN", "AENDSMM69BUX2", "ACUNARZFR75ET"]  # Amazon, KaBuM!, Magalu
+
+# Palavras que invalidam um anúncio para QUALQUER modelo (regex, sem diferenciar maiúsculas).
+[filtros_globais]
+excluir = [
+  "leitor de disco", "com leitor", "m[ií]dia f[ií]sica", "blu-?ray", "standard",
+  "usad[oa]", "seminov", "recondicionad", "reembalad", "vitrine", "outlet", "open ?box",
+  "\\bpro\\b", "1 ?tb", "2 ?tb",
+  "suporte", "capa", "tampa", "cooler", "base ", "carregador", "headset", "volante",
+]
+
+# ---------------------------------------------------------------------------
+[[produtos]]
+id = "bundle"
+nome = "PS5 Digital 825GB + Astro Bot + Gran Turismo 7"
+valor_alvo = 3600.00
+exigir = ["digital", "825"]
+excluir = ["wolverine", "fortnite", "ghost of", "gta", "anivers", "spider", "god of war", "returnal", "ratchet", "4 jogos"]
+
+  [[produtos.ofertas]]
+  loja = "kabum"
+  urls = [
+    "https://www.kabum.com.br/produto/989702",
+    "https://www.kabum.com.br/produto/934760",
+  ]
+
+  [[produtos.ofertas]]
+  loja = "amazon"
+  urls = ["https://www.amazon.com.br/dp/B0FPGF9J2J"]
+
+  [[produtos.ofertas]]
+  loja = "magalu"
+  urls = [
+    "https://www.magazineluiza.com.br/console-sony-playstation-5-ssd-825gb-controle-sem-fio-dualsense-2-jogos-digitais-edicao-digital/p/aebh5a7a94/ga/gap5/",
+    "https://www.magazineluiza.com.br/playstation-5-edicao-digital-825gb-1-controle-branco-sony-com-2-jogos/p/240590700/ga/gap5/",
+  ]
+  # O Magalu bloqueia leitura automática (HTTP 403). Se bloquear, lê a oferta
+  # "Magazine Luiza" no Buscapé (o vendedor final não pode ser confirmado lá).
+  plano_b_buscape = "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-ps5-edicao-digital-bundle-4k"
+
+  [[produtos.ofertas]]
+  loja = "carrefour"
+  urls = ["https://www.carrefour.com.br/produto/console-playstation-5-slim-digital-825gb-pacote-astro-bot-e-gran-turismo-7-336324399"]
+
+# ---------------------------------------------------------------------------
+[[produtos]]
+id = "console"
+nome = "PS5 Digital 825GB (sem jogos)"
+valor_alvo = 3800.00
+exigir = ["digital", "825"]
+# "Astro's Playroom" vem pré-instalado em todo PS5, então não é bloqueado.
+excluir = ["jogos", "\\+ ?jogo", "bundle", "pacote", "pack", "astro bot", "gran turismo", "wolverine", "fortnite", "ghost of", "gta", "anivers", "spider", "god of war", "returnal", "ratchet"]
+
+  [[produtos.ofertas]]
+  loja = "kabum"
+  urls = ["https://www.kabum.com.br/produto/1050570"]
+
+  [[produtos.ofertas]]
+  loja = "amazon"
+  urls = [
+    "https://www.amazon.com.br/dp/B0GWNKJDCZ",
+    "https://www.amazon.com.br/dp/B0CQKJN2C6",
+  ]
+
+  [[produtos.ofertas]]
+  loja = "magalu"
+  urls = ["https://www.magazineluiza.com.br/playstation-5-edicao-digital-825gb-1-controle-branco-sony/p/240604800/ga/gap5/"]
+  plano_b_buscape = "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k"
+
+  [[produtos.ofertas]]
+  loja = "carrefour"
+  # Hoje o Carrefour não vende esse modelo direto; o monitor busca no site a cada execução
+  # e só aceita anúncio "vendido e entregue por Carrefour".
+  busca = "console playstation 5 slim digital 825gb"
