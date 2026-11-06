@@ -7,7 +7,7 @@
     "failure_alerted": false,
     "below_target": false,
     "last_status": "ok",
-    "last_at": "2026-11-05T18:29:30-03:00",
+    "last_at": "2026-11-05T21:53:24-03:00",
     "url": "https://www.kabum.com.br/produto/989702"
   },
   "bundle|amazon": {
@@ -18,7 +18,7 @@
     "failure_alerted": false,
     "below_target": false,
     "last_status": "ok",
-    "last_at": "2026-11-05T18:29:30-03:00",
+    "last_at": "2026-11-05T21:53:24-03:00",
     "url": "https://www.amazon.com.br/dp/B0FPGF9J2J"
   },
   "bundle|magalu": {
@@ -29,7 +29,7 @@
     "failure_alerted": false,
     "below_target": false,
     "last_status": "ok",
-    "last_at": "2026-11-05T18:29:30-03:00",
+    "last_at": "2026-11-05T21:53:24-03:00",
     "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-ps5-edicao-digital-bundle-4k"
   },
   "bundle|carrefour": {
@@ -52,7 +52,7 @@
     "failure_alerted": false,
     "below_target": false,
     "last_status": "ok",
-    "last_at": "2026-11-05T18:29:30-03:00",
+    "last_at": "2026-11-05T21:53:24-03:00",
     "url": "https://www.kabum.com.br/produto/1050570"
   },
   "console|amazon": {
@@ -63,7 +63,7 @@
     "failure_alerted": false,
     "below_target": false,
     "last_status": "ok",
-    "last_at": "2026-11-05T18:29:30-03:00",
+    "last_at": "2026-11-05T21:53:24-03:00",
     "url": "https://www.amazon.com.br/dp/B0GWNKJDCZ"
   },
   "console|magalu": {
@@ -74,7 +74,7 @@
     "failure_alerted": false,
     "below_target": false,
     "last_status": "ok",
-    "last_at": "2026-11-05T18:29:30-03:00",
+    "last_at": "2026-11-05T21:53:24-03:00",
     "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k"
   },
   "console|carrefour": {
