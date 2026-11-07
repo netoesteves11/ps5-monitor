@@ -7,7 +7,7 @@
     "failure_alerted": false,
     "below_target": false,
     "last_status": "ok",
-    "last_at": "2026-11-06T09:44:39-03:00",
+    "last_at": "2026-11-06T21:50:02-03:00",
     "url": "https://www.kabum.com.br/produto/989702"
   },
   "bundle|amazon": {
@@ -18,7 +18,7 @@
     "failure_alerted": false,
     "below_target": false,
     "last_status": "ok",
-    "last_at": "2026-11-06T09:44:39-03:00",
+    "last_at": "2026-11-06T21:50:02-03:00",
     "url": "https://www.amazon.com.br/dp/B0FPGF9J2J"
   },
   "bundle|magalu": {
@@ -29,7 +29,7 @@
     "failure_alerted": false,
     "below_target": false,
     "last_status": "ok",
-    "last_at": "2026-11-06T09:44:39-03:00",
+    "last_at": "2026-11-06T21:50:02-03:00",
     "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-ps5-edicao-digital-bundle-4k"
   },
   "bundle|carrefour": {
@@ -52,29 +52,29 @@
     "failure_alerted": false,
     "below_target": false,
     "last_status": "ok",
-    "last_at": "2026-11-06T09:44:39-03:00",
+    "last_at": "2026-11-06T21:50:02-03:00",
     "url": "https://www.kabum.com.br/produto/1050570"
   },
   "console|amazon": {
-    "last_price": 4139.9,
+    "last_price": 4274.1,
     "min_price": 4139.9,
     "min_at": "2026-11-05T17:57:08-03:00",
     "failures": 0,
     "failure_alerted": false,
     "below_target": false,
     "last_status": "ok",
-    "last_at": "2026-11-06T09:44:39-03:00",
+    "last_at": "2026-11-06T21:50:02-03:00",
     "url": "https://www.amazon.com.br/dp/B0GWNKJDCZ"
   },
   "console|magalu": {
-    "last_price": 4699.0,
-    "min_price": 4699.0,
-    "min_at": "2026-11-05T17:57:08-03:00",
+    "last_price": 4047.08,
+    "min_price": 4047.08,
+    "min_at": "2026-11-06T21:50:02-03:00",
     "failures": 0,
     "failure_alerted": false,
     "below_target": false,
     "last_status": "ok",
-    "last_at": "2026-11-06T09:44:39-03:00",
+    "last_at": "2026-11-06T21:50:02-03:00",
     "url": "https://www.buscape.com.br/console-de-video-game/console-playstation-5-slim-825gb-sony-4k"
   },
   "console|carrefour": {
